@@ -1,0 +1,29 @@
+language: java
+jdk: oraclejdk7
+env:
+  matrix:
+    - ANDROID_SDKS=android-17,sysimg-17 ANDROID_TARGET=android-17 ANDROID_ABI=armeabi-v7a
+before_install:
+  - sudo apt-get update -qq
+  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
+  - wget http://dl.google.com/android/android-sdk_r21.1-linux.tgz
+  - tar -xvzf android-sdk_r21.1-linux.tgz
+  - export ANDROID_HOME=$PWD/android-sdk-linux
+  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+  - android update sdk --filter platform-tools,android-17,extra-android-support,$ANDROID_SDKS --no-ui --force
+  - echo no | android create avd --force -n myavd -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd myavd -no-audio -no-window &
+
+before_script:
+  - echo "before script"
+  - ./wait_emulator_to_boot
+  - serialno=`adb get-serialno`
+  - export SERIAL_ID=$serialno
+  - if [[ "$ANDROID_TARGET" == "android-17" || "$ANDROID_TARGET" == "android-16" ]]; then export APK_PATH=src/test/resources/android-server/android-server-2.21.0.apk; else export APK_PATH=src/test/resources/android-server/android-server-2.6.0.apk; fi
+  - export API_LEVEL=${ANDROID_TARGET:8}
+  - echo "$SERIAL_ID"
+  - echo "$APK_PATH"
+  - echo "$API_LEVEL"
+  - echo "before script finished"
+
+script: mvn test
