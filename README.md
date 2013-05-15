@@ -1,5 +1,5 @@
 # Kitchensink HTML5 Mobile Functional Test
-This project contains the functional tests for the [Kitchensink HTML5 Mobile Demo](https://github.com/jboss-jdf/jboss-as-quickstart/tree/master/kitchensink-html5-mobile) project on Android OS. The purpose of the project is to demonstrate how to automate the testing of a mobile web application which is deployed on [OpenShift](https://www.openshift.com/), on Android OS using [Arquillian](http://arquillian.org/) testing platform and [Travis CI](https://travis-ci.org).
+This project contains the functional test for the [Kitchensink HTML5 Mobile Demo](https://github.com/jboss-jdf/jboss-as-quickstart/tree/master/kitchensink-html5-mobile) project on Android OS. The purpose of the project is to demonstrate how to automate the testing of a mobile web application which is deployed on [OpenShift](https://www.openshift.com/), on Android OS using [Arquillian](http://arquillian.org/) testing platform and [Travis CI](https://travis-ci.org).
 
 The [Arquillian](http://arquillian.org/) testing platform is used to enable the testing automation. Arquillian integrates transparently with the testing framework which is JUnit in this case.
 
