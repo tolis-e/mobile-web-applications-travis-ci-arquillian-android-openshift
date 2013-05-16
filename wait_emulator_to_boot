@@ -2,12 +2,13 @@
 
 booted=""
 until [[ "$booted" =~ "stopped" ]]; do
-   booted=`adb -e shell getprop init.svc.bootanim`
-   echo "$booted"
-   if [[ "$booted" =~ "not found" ]]; then
-      echo "Could not boot emulator"
-      exit 1
-   fi
-   sleep 1
+    # -e directs command to the only running emulator
+    booted=`adb -e shell getprop init.svc.bootanim`
+    echo "$booted"
+    if [[ "$booted" =~ "not found" ]]; then
+        echo "Could not boot emulator"
+        exit 1
+    fi
+    sleep 1
 done
 echo "Emulator booted"
