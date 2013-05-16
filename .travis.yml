@@ -1,5 +1,5 @@
 language: java
-jdk: oraclejdk7
+jdk: openjdk7
 env:
   matrix:
     - ANDROID_SDKS=android-17,sysimg-17 ANDROID_TARGET=android-17 ANDROID_ABI=armeabi-v7a
@@ -13,7 +13,8 @@ before_install:
   - android update sdk --filter platform-tools,android-17,extra-android-support,$ANDROID_SDKS --no-ui --force
   - echo no | android create avd --force -n myavd -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd myavd -no-audio -no-window &
-
+install:
+  - echo "install phase"
 before_script:
   - echo "before script"
   - ./wait_emulator_to_boot
@@ -25,5 +26,4 @@ before_script:
   - echo "$APK_PATH"
   - echo "$API_LEVEL"
   - echo "before script finished"
-
 script: mvn test
