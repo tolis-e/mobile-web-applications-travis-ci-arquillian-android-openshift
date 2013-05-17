@@ -67,20 +67,11 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.12</version>
                     <configuration>
-                        <systemProperties>
-                            <property>
-                                <name>arq.apiLevel</name>
-                                <value>${env.API_LEVEL}</value>
-                            </property>
-                            <property>
-                                <name>arq.serialId</name>
-                                <value>${env.SERIAL_ID}</value>
-                            </property>
-                            <property>
-                                <name>arq.apkPath</name>
-                                <value>${env.APK_PATH}</value>
-                            </property>
-                        </systemProperties>
+                        <systemPropertyVariables>
+                            <arq.apiLevel>${env.API_LEVEL}</arq.apiLevel>
+                            <arq.serialId>${env.SERIAL_ID}</arq.serialId>
+                            <arq.apkPath>${env.APK_PATH}</arq.apkPath>
+                        </systemPropertyVariables>
                     </configuration>
                 </plugin>
             </plugins>
