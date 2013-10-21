@@ -1,14 +1,16 @@
 #!/bin/bash
 
 booted=""
+times=0
 until [[ "$booted" =~ "stopped" ]]; do
     # -e directs command to the only running emulator
-    booted=`adb -e shell getprop init.svc.bootanim`
+    booted=`adb -e shell getprop init.svc.bootanim 2>&1`
     echo "$booted"
-    if [[ "$booted" =~ "not found" ]]; then
+    let "times += 1"
+    if [[ $times -gt 20 ]]; then
         echo "Could not boot emulator"
         exit 1
     fi
-    sleep 1
+    sleep 10
 done
-echo "Emulator booted"
+echo "Emulator successfully booted"
